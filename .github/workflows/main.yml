@@ -10,27 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build and push
-        env:
-          CR_REGISTRY: crptmggr57u83nkgda0h
-          CR_REPOSITORY: cd-demo-ys-serverless
-          IMAGE_TAG: ${{ github.sha }}
-          YC_SA_KEY: ${{ secrets.YC_KEY }}
-        run: |
-          # Обмениваем JWT на IAM-токен через API
-          IAM_TOKEN=$(curl -s -X POST \
-            "https://iam.api.cloud.yandex.net/iam/v1/tokens" \
-            -H "Content-Type: application/json" \
-            -d "$(cat <(echo "$YC_SA_KEY"))")
-          
-          IAM_TOKEN=$(echo "$IAM_TOKEN" | python3 -c "import sys,json; print(json.load(sys.stdin)['iamToken'])")
-          
-          # Логин в Docker registry
-          echo "$IAM_TOKEN" | docker login -u oauth --password-stdin registry.yandex.cloud
-          
-          # Билд и пуш
-          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG .
-          docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
+      - name: yc-install
+        # You may pin to the exact commit or the version.
+        uses: lxhan/yc-install@v3
+        with:
+          # Yandex cloud service account private key. No logging in if parameter is not provided.
+          SA_KEY: ${{ secrets.YC_KEY }}
+    
+
+     
         
 #    - name: YC Serverless Container Deploy
 #      uses: yc-actions/yc-sls-container-deploy@v5.0.0
