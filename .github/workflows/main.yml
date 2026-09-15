@@ -10,6 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: yc-install
+        # You may pin to the exact commit or the version.
+        uses: lxhan/yc-install@v3
+        with:
+          # Yandex cloud service account private key. No logging in if parameter is not provided.
+          SA_KEY: ${{ secrets.YC_KEY }}
+    
       - name: Build and push
         env:
           CR_REGISTRY: crptmggr57u83nkgda0h
