@@ -22,7 +22,6 @@ jobs:
            CR_REGISTRY: crptmggr57u83nkgda0h
            CR_REPOSITORY: cd-demo-ys-serverless
            IMAGE_TAG: ${{ github.sha }}
-           YC_SA_KEY: ${{ secrets.YC_KEY }}
         run: |
           yc container registry configure-docker
           # Билд и пуш
@@ -36,9 +35,9 @@ jobs:
            CR_REPOSITORY: cd-demo-ys-serverless
            IMAGE_TAG: ${{ github.sha }}
         with:
-          yc-sa-json-credentials: ${{ secrets.YC_KEY }}
+          yc-sa-id: aje9ah0dukkv9sgbmqti
           container-name: pet-demo-ci-example
-          folder-id: bbac7gfen8r11b301be0
+          folder-id: b1gjsnkava2p5l65d769
           public: true
           # Url of the docker image
           revision-image-url: cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
