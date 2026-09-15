@@ -36,8 +36,11 @@ jobs:
            IMAGE_TAG: ${{ github.sha }}
         with:
           yc-sa-id: aje9ah0dukkv9sgbmqti
+          yc-sa-json-credentials: ${{ secrets.YC_KEY }}
           container-name: pet-demo-ci-example
           folder-id: b1gjsnkava2p5l65d769
           public: true
           # Url of the docker image
-          revision-image-url: cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
+          revision-image-url: cr.yandex/${{ env.CR_REGISTRY }}/${{ env.CR_REPOSITORY }}:${{ env.IMAGE_TAG }}
+
+
