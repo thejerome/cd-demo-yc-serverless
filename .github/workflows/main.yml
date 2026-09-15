@@ -41,4 +41,4 @@ jobs:
           folder-id: bbac7gfen8r11b301be0
           public: true
           # Url of the docker image
-          revision-image-url: cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG  
+          revision-image-url: cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
