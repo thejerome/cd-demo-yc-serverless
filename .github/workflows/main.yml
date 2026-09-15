@@ -36,6 +36,7 @@ jobs:
            CR_REPOSITORY: cd-demo-ys-serverless
            IMAGE_TAG: ${{ github.sha }}
         with:
+          yc-sa-json-credentials: ${{ secrets.YC_KEY }}
           container-name: pet-demo-ci-example
           folder-id: bbac7gfen8r11b301be0
           public: true
