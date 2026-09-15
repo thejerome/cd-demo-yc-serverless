@@ -1,2 +1,3 @@
-# cd-demo-gcp-cloud-run
-Demo project to introduce Cloud Run continous deployment
+# cd-demo-yc-serverless
+
+Demo project to introduce YC Serverless Containers continous deployment
