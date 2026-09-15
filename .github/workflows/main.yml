@@ -42,5 +42,5 @@ jobs:
           public: true
           # Url of the docker image
           revision-image-url: cr.yandex/${{ env.CR_REGISTRY }}/${{ env.CR_REPOSITORY }}:${{ env.IMAGE_TAG }}
-
+          revision-service-account-id: aje9ah0dukkv9sgbmqti
 
