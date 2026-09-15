@@ -15,9 +15,14 @@ jobs:
         CR_REGISTRY: crptmggr57u83nkgda0h
         CR_REPOSITORY: cd-demo-ys-serverless
         IMAGE_TAG: ${{ github.sha }}
+        YC_SA_KEY: ${{ secrets.YC_SA_KEY }}
       run: |
+        # Аутентификация
+        docker login -u oauth -p "$(echo "$YC_SA_KEY" | python3 -c 'import sys,json; print(json.load(sys.stdin)["iam_token"])')" registry.yandex.cloud
+        # Билд и пуш
         docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG .
         docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
+        
 #    - name: YC Serverless Container Deploy
 #      uses: yc-actions/yc-sls-container-deploy@v5.0.0
 #      with:
