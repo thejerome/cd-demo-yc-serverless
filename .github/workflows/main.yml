@@ -1,0 +1,29 @@
+name: Deploy the application to YC Serverless Containers
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy job
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build, tag, and push image to Yandex Cloud Container Registry
+      env:
+        CR_REGISTRY: crptmggr57u83nkgda0h
+        CR_REPOSITORY: cd-demo-ys-serverless
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG .
+        docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
+#    - name: YC Serverless Container Deploy
+#      uses: yc-actions/yc-sls-container-deploy@v5.0.0
+#      with:
+#        yc-sa-json-credentials: ${{ secrets.YC_KEY }}
+#        container-name: 
+#        folder-id: 
+#        public: true
+#        # Url of the docker image
+#        revision-image-url: 
